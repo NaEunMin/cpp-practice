@@ -16,7 +16,7 @@ using namespace std;
 
 class Circle{
     int radius;
-    string name;
+    string name; //string() 생성자를 호출하려 시도 --> #include <string> 필요, std 스킵을 위해 using namespace std; 필요
     public:
     void setCircle(string name, int radius);
     double getArea();
@@ -67,7 +67,7 @@ void CircleManager::searchByName(){
     cin >> name;
     for(int i=0;i<size;i++){
         if(p[i].getName()==name){
-        cout << name <<"의 면적은 " << p[i].getArea() << endl;
+        cout << name <<"의 면적은 " << p[i].getArea() << endl; //cout << name + "의 면적은 "도 가능 string클래스의 내장된 기
         } 
     }
 }
