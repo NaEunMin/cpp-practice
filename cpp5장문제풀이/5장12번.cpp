@@ -14,7 +14,8 @@ Write your code in this editor and press "Run" button to compile and execute it.
     this->scores = new int[dept.size];
     for(int i=0;i<dept.size;i++){
         scores[i]=dept.scores[i];  여기서 자꾸 dept. 이거 빼먹고 코드작성해서 오류가 나왔음. 이런 실수 하지않게 꼼꼼히 코드보기
-
+//포인터의 존재로 디폴트복사생성자가 호출되면 포인터안의 값이 완벽히 복사되지않고 디버깅 돌려보면 음수의 이상한 값이 남아있어 프로그램이 정상적으로 작동하지 않는다.
+// 위의 이유로 scores값을 완벽이 for문으로 복사를 해주던가 아니면 함수의 매개변수를 참조로 받아 객체의 전부를 완벽히 넘겨주게 만들어야한다.
 */
 
 #include <iostream>
