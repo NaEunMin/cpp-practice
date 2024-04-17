@@ -31,7 +31,7 @@ class Random{
         srand((unsigned)time(0));
     }
     static int nextInt(int min=0, int max=32767){
-        return rand()%32767+min;
+        return rand()%max+min;
     }
     static char nextAlphabet(){
         return 'a'+rand()%26;
@@ -44,7 +44,7 @@ class Random{
 
 int main()
 {
-    Random random;
+    Random random; //이 코드는 써도 그만 안써도 그만
     Random::seed();
     cout << "1에서 100까지 랜덤한 정수 10개를 출력합니다.\n";
     for(int i=0; i<10; i++){
