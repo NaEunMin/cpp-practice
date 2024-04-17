@@ -21,62 +21,57 @@ static 멤버변수 : static int count = 0; //태그와 디버그를 저장할�
 #include <iostream>
 #include <string>
 using namespace std;
-
-class Trace{
-    public:
-    static string tagName[100];
-    static string debugCourse[100];
-    static int count;
-    static void put(string tag, string debug);
-    static void print(string tag="all");
+class Trace {
+public:
+	static string tagName[100];
+	static string debugInfo[100];
+	static int index;
+	static void put(string tag, string Info);
+	static void print(string tag);
+	static void print();
 };
-
-int Trace::count = 0;
+//이 부분 매우 중요!! static 멤버 변수는 외부에 전역 변수로 반드시 선언되어야한다.
+// class 내부에서 만들었다면 전역 변수에 반드시 다시 선언하여 변수 공간을 만들어주자.
+int Trace::index = 0;
 string Trace::tagName[100];
-string Trace::debugCourse[100];
+string Trace::debugInfo[100];
 
-void Trace::put(string tag, string debug){
-    tagName[count] = tag;
-    debugCourse[count] = debug;
-    count++;
+
+void Trace::put(string t, string in) {
+	tagName[index] = t;
+	debugInfo[index] = in;
+	index++;
+
 }
+void Trace::print(string t) {
 
-void Trace::print(string tag){
-    if(tag=="all"){
-        cout << "----- 모든 Trace 정보를 출력합니다. -----\n";
-        for(int i=0; i<count; i++){
-            cout << tagName[i] << ":" << debugCourse[i] << endl;
-        }
-    }
-    else{
-        cout << "-----" << tag << "태그의 Trace 정보를 출력합니다. -----\n";
-        for(int i=0; i<count; i++){
-            if(tagName[i]=="f()")
-            cout << tagName[i] << ":" << debugCourse[i] << endl;
-        }
-    }
+	cout << t << "태그의 Trace 정보를 출력합니다" << endl;
+	for (int i = 0; i <=index; i++) {
+		if (tagName[i] == t) {
+			cout << tagName[i] << ":" << debugInfo[i] << endl;
+		}
+	}
 }
-
-    
-
-void f(){
-    int a,b,c;
-    cout << "두 개의 정수를 입력하세요>>";
-    cin >> a >> b;
-    Trace::put("f()", "정수를 입력 받았음");
-    c = a + b;
-    Trace::put("f()", "합 계산");
-    cout << "합은" << c << endl;
+void Trace::print() {
+	cout << "모든 Trace 정보를 출력합니다" << endl;
+	for (int i = 0; i <=index; i++) {
+		cout << tagName[i] << ":" << debugInfo[i] << endl;
+	}
 }
+void f() {
+	int a, b, c;
+	cout << "두 개의 정수를 입력하세요>>";
+	cin >> a >> b;
+	Trace::put("f()", "정수를 입력 받았음");
+	c = a + b;
+	Trace::put("f()", "합 계산");
+	cout << "합은 " << c << endl;
+}
+int main() {
+	Trace::put("main()", "프로그램 시작합니다");
+	f();
+	Trace::put("main()", "종료");
 
-int main()
-{
-    Trace::put("main()", "프로그램 시작합니다");
-    f();
-    Trace::put("main()", "종료");
-    
-    Trace::print("f()");
-    Trace::print();
-
-    return 0;
+	Trace::print("f()");
+	Trace::print();
 }
