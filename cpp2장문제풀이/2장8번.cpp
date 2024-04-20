@@ -19,3 +19,24 @@ int main() {
 	cout << "가장 긴 이름은" << max_str;
 	return 0;
 }
+
+/*
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+using namespace std;
+int main() {
+	char name[100];
+	int max = 0;
+	char maxName[100];
+	cout << "5 명의 이름을 ';'으로 구분하여 입력하세요" << endl;
+	for (int i = 0; i < 5; i++) {
+		cin.getline(name, 100, ';');
+		cout << i + 1 << " : " << name << endl;
+		if (max < strlen(name)) {
+			max = strlen(name);
+			strcpy(maxName, name);
+		}
+	}
+	cout << "가장 긴 이름은 " << maxName << endl;
+}
+*/
