@@ -52,3 +52,34 @@ int main()
     }
     return 0;
 }
+//여기서부터는 다른 방법 bool타입 변수 check를 겹치는 요소를 확인하는 플래그로 사용함
+#include <iostream>
+using namespace std;
+template <class T>
+T* remove(T src[], int sizeSrc, T minus[], int sizeMinus, int& retSize) {
+	T* temp = new T[sizeSrc];
+	bool check = false; //겹치는 요소가 있는지 확인하는 플래그
+	for (int i = 0; i < sizeSrc; i++) {
+		for (int j = 0; j < sizeMinus; j++) {
+			if (src[i] == minus[j]) {
+				check = true; //같으면 true
+				break;
+			}
+		}
+		if (check != true) { //같지 않았다면 temp에 저장한다
+			temp[retSize++] = src[i];
+		}
+		check = false;//같으면 true이므로 다음 반복때 다시 확인하기 위해서 false로 초기화
+	}
+	return temp;
+}
+int main() {
+	int src[] = { 1,2,3,4,5 };
+	int minus[] = { 2,3,4, };
+	int retSize = 0;
+	int* temp = remove(src, 5, minus, 3, retSize);
+	for (int i = 0; i < retSize; i++) {
+		cout << temp[i] << " ";
+	}
+	return 0;
+}
