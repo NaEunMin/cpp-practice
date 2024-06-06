@@ -14,38 +14,33 @@ if (b < a) 이렇게 있다고 하면
 
 #include <iostream>
 #include <string>
-
 using namespace std;
-
 class Book {
 	string title;
 	int price, pages;
-public : 
-	Book(string title="", int price=0, int pages=0) {
-		this->title = title; this->price = price; this->pages = pages;
+public:
+	Book(string title = "", int price = 0, int pages = 0) {
+		this->title = title;
+		this->price = price;
+		this->pages = pages;
 	}
 	void show() {
-		cout << title << ' ' << price << "원 " << pages << " 페이지" << endl;
+		cout << title << ' ' << price << "원 " << pages << "페이지 " << endl;
 	}
 	string getTitle() { return title; }
-	
-	friend bool operator < (string title, Book op1);
+	friend bool operator <(string b, Book a); //연산자 함수 작성 시 main 함수에 왼쪽 피연산자에 본인 객체가 아닌 상수 ex)int, string 등이 있다면 friend함수로 작성
 };
-
-bool operator < (string title, Book op1){
-    if(title<op1.title)
-    return true;
-    else 
-    return false;
+bool operator <(string b, Book a) {
+	if (b < a.title) return true;
+	else return false;
 }
 int main() {
-
 	Book a("청춘", 20000, 300);
 	string b;
 	cout << "책 이름을 입력하세요>>";
 	getline(cin, b);
-	if (b < a)
-	cout << a.getTitle() << "이 " << b << "보다 뒤에 있구나!" << endl;
-
+	if (b < a) {
+		cout << a.getTitle() << "이" << b << "보다 뒤에 있구나!" << endl;
+	}
 	return 0;
 }
