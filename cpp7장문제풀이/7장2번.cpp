@@ -13,71 +13,52 @@ title == op.title && price == op.price && pages == op.pages ---> 이 코드처�
 
 
 #include <iostream>
-#include <string>
-
 using namespace std;
-
 class Book {
 	string title;
 	int price, pages;
-public : 
-	Book(string title="", int price=0, int pages=0) {
-		this->title = title; this->price = price; this->pages = pages;
+public:
+	Book(string title = "", int price = 0, int pages = 0) {
+		this->title = title;
+		this->price = price;
+		this->pages = pages;
 	}
 	void show() {
-		cout << title << ' ' << price << "원 " << pages << " 페이지" << endl;
+		cout << title << ' ' << price << "원 " << pages << "페이지 " << endl;
 	}
 	string getTitle() { return title; }
-	
-	friend bool operator == (Book op, int price);
-	friend bool operator == (Book op, string title);
-	friend bool operator == (Book op1, Book op2);
-	/* **************클래스 멤버 함수 구현*****************
-	bool operator == (int price) { 
-		if( this->price == price ) return true;
+	/*
+	bool operator == (int a) {
+		if (price == a) return true;
 		else return false;
 	}
-	
-	bool operator == (string title) { 
-		if( this->title == title ) return true;
+	bool operator == (string a) {
+		if (title == a) return true;
 		else return false;
 	}
-	
-	bool operator == (Book op) {
-		if( title == op.title && price == op.price && pages == op.pages ) return true;
+	bool operator == (Book b) {
+		if (title == b.title && price == b.price && pages == b.pages) return true;
 		else return false;
 	}*/
-	
+	friend bool operator == (Book a, int b);
+	friend bool operator == (Book a, string b);
+	friend bool operator == (Book a, Book b);
 };
-
-bool operator == (Book op, int price){
-    if(op.price==price)
-    return true;
-    else
-    return false;
+bool operator == (Book a, int b) {
+	if (a.price == b) return true;
+	else return false;
 }
-
-bool operator == (Book op, string title){
-    if(op.title==title)
-    return true;
-    else
-    return false;
+bool operator == (Book a, string b) {
+	if (a.title == b) return true;
+	else return false;
 }
-
-bool operator == (Book op1, Book op2){
-    if(op1.title==op2.title && op1.price==op2.price && op1.pages==op2.pages)
-    return true;
-    else
-    return false;
+bool operator == (Book a, Book b) {
+	if (a.title == b.title && a.price == b.price && a.pages == b.pages) return true;
+	else return false;
 }
-
 int main() {
-	Book a("명품 C++", 30000, 500), b("고품 C++", 30000, 500);
-	if( a == 30000 ) cout << "정가 30000원" << endl;
-	if( a == "명품 C++" ) cout << "명품 C++ 입니다." << endl;
-	if( a == b ) cout << "두 책이 같은 책입니다." << endl;
-	else
-	cout << "두 책이 다른 책입니다." << endl;
-	
-	return 0;
+	Book a("청춘", 30000, 300), b("미래", 30000, 500);
+	if (a == 30000) cout << "정가 30000원 입니다." << endl;
+	if (a == "청춘") cout << "청춘입니다." << endl;
+	if (a == b) cout << "두 책이 같은 책입니다." << endl;
 }
