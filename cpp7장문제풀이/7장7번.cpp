@@ -19,70 +19,52 @@ Write your code in this editor and press "Run" button to compile and execute it.
 */
 
 #include <iostream>
-
 using namespace std;
-
-class Matrix{
-    int Num_array[4];
-    public:
-    Matrix(int num1=0, int num2=0, int num3=0, int num4=0){
-        Num_array[0]=num1;
-        Num_array[1]=num2;
-        Num_array[2]=num3;
-        Num_array[3]=num4;
-    }
-    void show(){
-        cout << "Matrix = { ";
-        for(int i=0; i<4; i++){
-            cout << Num_array[i] << ' ';
-        }
-        cout << '}';
-    }
-    /* 클래스 멤버함수 구현 ******************
-    int* operator >> (int x[4]){
-        for(int i=0; i<4; i++){
-            x[i] = Num_array[i];
-        }
-        return x;
-    }
-    
-    Matrix& operator << (int x[4]){
-        for(int i=0; i<4; i++){
-            Num_array[i] = x[i];
-        }
-        return *this;
-    }*/
-    
-    friend void operator >> (Matrix op, int x[4]);
-    friend void operator << (Matrix &op, int x[4]);
-
+class Matrix {
+	int a, b, c, d;
+public:
+	Matrix(int a = 0, int b = 0, int c = 0, int d = 0) {
+		this->a = a; this->b = b; this->c = c; this->d = d;
+	}
+	void show() {
+		cout << "Matrix = { " << a << ' ' << ' ' << b << ' ' << c << ' ' << d << " }" << endl;
+	}
+	/*
+	void operator >> (int x[]) {
+		x[0] = a;
+		x[1] = b;
+		x[2] = c;
+		x[3] = d;
+	}
+	Matrix& operator << (int y[]) {
+		a = y[0];
+		b = y[1];
+		c = y[2];
+		d = y[3];
+		return *this;
+	}*/
+	friend void operator >> (Matrix a, int x[]);
+	friend void operator << (Matrix& a, int y[]);
 };
-
-void operator >> (Matrix op, int x[4]){
-    for(int i=0; i<4; i++){
-        x[i] = op.Num_array[i];
-    }
+void operator >> (Matrix a, int x[]) {
+	x[0] = a.a;
+	x[1] = a.b;
+	x[2] = a.c;
+	x[3] = a.d;
 }
-
-void operator << (Matrix &op, int x[4]){
-    for(int i=0; i<4; i++){
-        op.Num_array[i] = x[i];
-    }
+void operator << (Matrix& a, int y[]) {
+	a.a = y[0];
+	a.b = y[1];
+	a.c = y[2];
+	a.d = y[3];
 }
+int main() {
+	Matrix a(4,3,2,1), b;
+	int x[4], y[4] = { 1,2,3,4 };
+	a >> x;
+	b << y;
 
-int main()
-{
-    Matrix a(4,3,2,1), b;
-    int x[4], y[4] = {1,2,3,4};
-    a >> x;
-    b << y;
-    
-    for(int i=0; i<4; i++){
-        cout << x[i] << ' ' ;
-    }
-    
-    cout << endl;
-    b.show();
-
-    return 0;
+	for (int i = 0; i < 4; i++) cout << x[i] << ' ';
+	cout << endl;
+	b.show();
 }
