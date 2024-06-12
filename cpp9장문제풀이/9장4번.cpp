@@ -1,9 +1,3 @@
-/******************************************************************************
-                              Online C++ Compiler.
-               Code, Compile, Run and Debug C++ program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-*******************************************************************************/
-
 #include <iostream>
 
 using namespace std;
@@ -35,45 +29,40 @@ void LoopAdder::run() {
 	sum = calculate();
 	write();
 }
-
-class WhileLoopAdder : public LoopAdder{
-    public:
-    WhileLoopAdder(string name) : LoopAdder(name){}
-    int calculate(){
-        int sum=0;
-        int i = getX();
-        int count=0;
-        while(count<getY()-getX()+1){
-            sum += i;
-            i++;
-            count++;
-        }
-        return sum;
-    }
+class WhileLoopAdder : public LoopAdder {
+public:
+	WhileLoopAdder(string name) : LoopAdder(name) {}
+	virtual int calculate() {
+		int sum = 0;
+		int i = getX();
+		while (i != getY()+1) {
+			sum += i;
+			i++;
+		}
+		return sum;
+	}
 };
+class DoWhileLoopAdder : public LoopAdder {
+public:
+	DoWhileLoopAdder(string name) : LoopAdder(name) {}
+	virtual int calculate() {
+		int sum = 0;
+		int i = getX();
+		do {
+			sum += i;
+			i++;
+		} while (i != getY() + 1);
+		return sum;
+	}
 
-class DoWhileLoopAdder : public LoopAdder{
-    public:
-    DoWhileLoopAdder(string name) : LoopAdder(name){}
-    int calculate(){
-        int sum=0;
-        int i = getX();
-        int count=0;
-        do{
-            sum += i;
-            i++;
-            count++;
-        }while(count<getY()-getX()+1);
-        return sum;
-    }
 };
-
 int main()
 {
-    WhileLoopAdder whileLoop("While Loop");
-    DoWhileLoopAdder dowhileLoop("Do While Loop");
-    
-    whileLoop.run();
-    dowhileLoop.run();
-    return 0;
+	WhileLoopAdder whileLoop("While Loop");
+	DoWhileLoopAdder doWhileLoop("Do while Loop");
+
+	whileLoop.run();
+	doWhileLoop.run();
+
+	return 0;
 }
