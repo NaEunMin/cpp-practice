@@ -1,16 +1,3 @@
-/******************************************************************************
-                              Online C++ Compiler.
-               Code, Compile, Run and Debug C++ program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-*******************************************************************************/
-
-/*
-
-문제풀고 다른 분들의 코드를 봤는데 비트연산자 &,|,^로 코드를 작성하셨다.
-평소에 쓰던 논리연산자는 주석처리해두었다.
-
-*/
-
 #include <iostream>
 
 using namespace std;
@@ -23,30 +10,33 @@ public:
 	virtual bool operation() = 0;
 };
 
-class ANDGate : public AbstractGate{
-    public:
-    bool operation(){
-        return x&y; //return x&&y;
-    }
+class ANDGate : public AbstractGate {
+public:
+	virtual bool operation() {
+		if (x == true && y == true) return true;
+		else return false;
+	}
 };
 
-class ORGate : public AbstractGate{
-    public:
-    bool operation(){
-        return x|y; //return x||y;
-    }
+class ORGate : public AbstractGate {
+public:
+	virtual bool operation() {
+		if (x == true || y == true)return true;
+		else return false;
+	}
 };
 
-class XORGate : public AbstractGate{
-    public:
-    bool operation(){
-        return x^y;
-    }
+class XORGate : public AbstractGate {
+public:
+	virtual bool operation() {
+		if (x == y) return false;
+		else return true;
+	}
 };
 
 int main()
 {
-    ANDGate andGate;
+	ANDGate andGate;
 	ORGate orGate;
 	XORGate xorGate;
 
@@ -60,5 +50,5 @@ int main()
 	cout << xorGate.operation() << endl;
 
 
-    return 0;
+	return 0;
 }
